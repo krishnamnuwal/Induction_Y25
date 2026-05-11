@@ -129,6 +129,7 @@ Stores customer information.
 
 
 4. Abstract Account Class
+Base class for all account types.
 | Attribute     | Type              | Description           |
 | ------------- | ----------------- | --------------------- |
 | accountNumber | long              | Unique account number |
@@ -142,6 +143,7 @@ Stores customer information.
 
 
 5. SavingsAccount Class
+Inherits from Account.
 | Attribute      | Type   | Description              |
 | -------------- | ------ | ------------------------ |
 | interestRate   | double | Interest percentage      |
@@ -149,12 +151,14 @@ Stores customer information.
 
 
 6. CurrentAccount Class
+Inherits from Account.
 | Attribute      | Type   | Description          |
 | -------------- | ------ | -------------------- |
 | overdraftLimit | double | Allowed overdraft    |
 | businessName   | String | Business holder name |
 
 7.FixedDepositAccount Class
+Inherits from Account.
 | Attribute      | Type   | Description      |
 | -------------- | ------ | ---------------- |
 | FDAmount       | double | Deposit amount   |
@@ -163,6 +167,7 @@ Stores customer information.
 | tenureMonths   | int    | Deposit duration |
 
 8.Transaction Class
+Represents all banking transactions.
 | Attribute       | Type    | Description           |
 | --------------- | ------- | --------------------- |
 | transactionId   | int     | Unique transaction ID |
@@ -174,7 +179,7 @@ Stores customer information.
 | status          | String  | Success/pending       |
 
 9.Loan Class
-Represents customer loans
+Represents customer loans.
 | Attribute    | Type     | Description       |
 | ------------ | -------- | ----------------- |
 | loanId       | int      | Unique loan ID    |
