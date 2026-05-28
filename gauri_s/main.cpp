@@ -9,17 +9,12 @@
 #include "bank.h"
 #include "notification.h"
 
-void separator(const std::string& title) {
-    std::cout << "\n╔══════════════════════════════════════════╗\n";
-    std::cout << "║  " << std::left << std::setw(40) << title << "║\n";
-    std::cout << "╚══════════════════════════════════════════╝\n";
-}
 
 int main() {
     std::cout << std::fixed << std::setprecision(2);
 
     // ── 1. Setup Bank & Branches ─────────────────────────────────────────────
-    separator("1. Bank & Branch Setup");
+    std::cout << "║  1. Bank & Branch Setup ║\n";
     Bank myBank("National Savings Bank of India");
     myBank.display();
 
@@ -28,30 +23,31 @@ int main() {
     myBank.showAllBranches();
 
     // ── 2. Add Employees ─────────────────────────────────────────────────────
-    separator("2. Employee Registration");
+    std::cout << "║  2. Employee Registration ║\n";
     myBank.addEmployee("Rajan Mehta",   "Manager", 85000.0, mainBranch);
     myBank.addEmployee("Priya Sharma",  "Cashier",  45000.0, mainBranch);
     myBank.addEmployee("Anil Kumar",    "Manager", 80000.0, noidaBranch);
     mainBranch->showEmployees();
 
     // ── 3. Register Customers ─────────────────────────────────────────────────
-    separator("3. Customer Registration");
+        std::cout << "║  3. Customer Registration ║\n";
+
     Customer* alice = myBank.addCustomer(
-        "Alice Verma", "1995-04-12", "Female",
+        "Alice", "1995-04-12", "Female",
         "9876543210", "alice@email.com",
         "12 Gandhi Nagar, Lucknow",
         "1234-5678-9012", "ABCPV1234D");
 
     Customer* bob = myBank.addCustomer(
-        "Bob Singh", "1988-11-30", "Male",
+        "Bob", "1988-11-30", "Male",
         "9123456780", "bob@email.com",
         "45 Nehru Place, Noida",
         "9876-5432-1098", "XYZBS5678E");
 
     myBank.showAllCustomers();
 
-    // ── 4. Open Accounts (Factory Pattern) ───────────────────────────────────
-    separator("4. Account Opening (Factory)");
+    // -- 4. Open Accounts ---------------------------------
+    std::cout << "║  4. Account Opening (Factory) ║\n";
 
     SavingsAccount* aliceSavings = dynamic_cast<SavingsAccount*>(
         myBank.openAccount("Savings", 10000.0, mainBranch, alice));
@@ -67,8 +63,8 @@ int main() {
     std::cout << "\nBob's accounts:\n";
     bob->showAccounts();
 
-    // ── 5. Transactions ───────────────────────────────────────────────────────
-    separator("5. Transactions");
+    // -- 5. Transactions -----------------------------------
+    std::cout << "║  5. Transactions ║\n";
 
     std::cout << "\n-- Alice deposits ₹5,000 --\n";
     aliceSavings->deposit(5000.0);
@@ -85,8 +81,9 @@ int main() {
     std::cout << "\nAlice's statement:\n";
     aliceSavings->printStatement();
 
-    // ── 6. Interest Application ───────────────────────────────────────────────
-    separator("6. Interest / Fee Application");
+    // -- 6. Interest Application ---------------------------------
+        std::cout << "║  6. Interest / Fee Application ║\n";
+
     std::cout << "\n-- Monthly interest for Alice's Savings --\n";
     aliceSavings->applyInterest();
     std::cout << "\n-- Monthly fee for Bob's Current account --\n";
@@ -95,8 +92,9 @@ int main() {
     aliceFD->applyInterest();
     aliceFD->displayInfo();
 
-    // ── 7. Loan Management ────────────────────────────────────────────────────
-    separator("7. Loan Management");
+    // -- 7. Loan Management -------------------------------
+        std::cout << "║  7. Loan Management ║\n";
+
 
     Loan* homeLoan    = myBank.applyLoan(alice, "Home",     3500000.0, 8.5, 20);
     Loan* carLoan     = myBank.applyLoan(bob,   "Car",       700000.0, 9.0,  5);
@@ -108,8 +106,9 @@ int main() {
     std::cout << "\nBob's loans:\n";
     bob->showLoans();
 
-    // ── 8. ATM Card Management ────────────────────────────────────────────────
-    separator("8. ATM Card Management");
+    // -- 8. ATM Card Management -------------------------------
+        std::cout << "║  8. ATM Card Management ║\n";
+
 
     ATMCard* aliceCard = myBank.issueCard(aliceSavings, 1234, 456);
     ATMCard* bobCard   = myBank.issueCard(bobCurrent,   5678, 789);
@@ -147,11 +146,12 @@ int main() {
         std::cerr << "  Caught: " << e.what() << "\n";
     }
 
-    // ── 9. Notifications (Strategy Pattern) ──────────────────────────────────
-    separator("9. Notification System (Strategy)");
+    // -- 9. Notifications (Strategy Pattern) -----------------------
+        std::cout << "║  9. Notification System (Strategy) ║\n";
+
 
     SMSNotification   sms(alice->mobileNumber,
-                          "Dear Alice, ₹5,000 credited to your account.");
+                          "Dear Alice, Rs. 5,000 credited to your account.");
     EmailNotification email(alice->email,
                             "Account Credit Alert",
                             "Dear Alice, your account has been credited with ₹5,000.");
@@ -162,8 +162,8 @@ int main() {
     std::cout << "\n-- Sending Email notification --\n";
     alice->notify(&email);
 
-    // ── 10. Exception Handling Demo ───────────────────────────────────────────
-    separator("10. Exception Handling");
+    // -- 10. Exception Handling Demo --------------------------
+    std::cout << "║  10. Exception Handling ║\n";
 
     std::cout << "\n-- Attempting to breach minimum balance --\n";
     try {
@@ -190,13 +190,14 @@ int main() {
     }
     aliceSavings->activateAccount();   // re-activate
 
-    // ── Final Summary ─────────────────────────────────────────────────────────
-    separator("System Summary");
+    // -- Final Summary ---------------------------------
+        std::cout << "║  System Summary ║\n";
+
     myBank.display();
     std::cout << "\nFinal Balances:\n";
     alice->showAccounts();
     bob->showAccounts();
 
-    std::cout << "\n  All objects cleaned up via destructors.\n";
+    //All objects cleaned up via destructors.
     return 0;
 }
