@@ -11,7 +11,7 @@
 class Branch;
 class Customer;
 
-// ─── Base class Account ───────────────────────────────────────────────────
+// -- Base class Account ------------------
 class Account {
 private:
     static long numCounter;
