@@ -79,6 +79,10 @@ Using the translation vectors (`tvecs`) and error values from OpenCV:
 1. Your complete `swarm_tracker` ROS 2 package containing all scripts and launch files.
 2. A **2-minute screen recording** demonstrating your successful track. The video must show both the 3D Gazebo simulation of your completed subtasks and an inset window of the live OpenCV camera feed with annotations.
 
+> [!CAUTION]
+> **Do NOT commit your build files!** 
+> Make sure you have a proper `.gitignore` in your workspace. You must **only** submit your source code (`src/`, `launch/`, `package.xml`, `setup.py`, etc.). Do **not** commit the `build/`, `install/`, or `log/` directories, nor any `__pycache__` folders. Committing binary artifacts will cause the autograder pipeline to fail and your PR will be rejected.
+
 ### How to Submit (Pull Request)
 To integrate with our autograding CI/CD pipeline, you **must** submit your work via a GitHub Pull Request (PR).
 
@@ -88,9 +92,8 @@ To integrate with our autograding CI/CD pipeline, you **must** submit your work 
 4. **Commit & Push:** Commit your changes and push the branch to your fork.
 5. **Open a PR:** Go to the main repository and open a Pull Request. 
 
-Once your PR is opened, our **GitHub Actions** bot (running Ubuntu 24.04 and ROS 2 Jazzy) will automatically verify that your package compiles successfully. Mentors will review your code and video demo directly in the PR!
+Once your PR is opened, our **GitHub Actions** bot (running Ubuntu 24.04 and ROS 2 Jazzy) will automatically verify that your package compiles successfully.We will review your code and video demo directly in the PR!
 
-*(Note: Google Classroom is only used for announcements or non-code submissions.)*
 
 ---
 Good luck!
